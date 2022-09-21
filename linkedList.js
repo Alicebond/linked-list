@@ -29,20 +29,43 @@ function LinkedList(first) {
     }
     currentNode = Node(value);
   };
+
   const prepend = (value) => {
     let newHead = Node(value);
     newHead.next = first;
   };
+
   const size = () => {
     let size = 0,
       currentNode = first;
     while (currentNode.value) {
       currentNode = currentNode.next;
       size += 1;
+      if (!currentNode) return size;
     }
-    return size;
   };
-  return { first, append, prepend, size };
+
+  const head = () => first.value;
+
+  const tail = () => {
+    let currentNode = first;
+    while (currentNode.next) {
+      currentNode = currentNode.next;
+    }
+    return currentNode.value;
+  };
+
+  const at = (index) => {
+    let currentIndex = 0;
+    let currentNode = first;
+    while (currentNode.value) {
+      if (currentIndex === index) return currentNode.value;
+      currentIndex += 1;
+      currentNode = currentNode.next;
+      if (!currentNode) return;
+    }
+  };
+  return { first, append, prepend, size, head, tail, at };
 }
 
 const node1 = Node("once");
