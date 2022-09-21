@@ -103,8 +103,32 @@ function LinkedList(first) {
     str += 'null';
     return str;
   }
+  
+    const insertAt = (value, index) => {
+    if (index === 0) {
+      prepend(value);
+      return;
+    };
+    let newNode = Node(value);
+    while(currentIndex < index - 1) {
+      currentNode = currentNode.next;
+      currentIndex += 1;
+    }
+    let temp = currentNode.next;
+    currentNode.next = newNode;
+    newNode.next = temp;
+  }
 
-  return { first, append, prepend, size, head, tail, at, pop, contains, find, toString };
+  const removeAt = (index) => {
+    while(currentIndex < index - 2) {
+      currentNode = currentNode.next;
+      currentIndex += 1;
+    }
+    currentNode.next = currentNode.next.next;
+  }
+
+  return { first, append, prepend, size, head, tail, at, pop, contains, find, toString, insertAt, removeAt };
+
 }
 
 const node1 = Node("once");
