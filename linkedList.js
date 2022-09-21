@@ -22,8 +22,9 @@ function Node(value = null) {
 }
 
 function LinkedList(first) {
+  let currentNode = first, currentIndex = 0;
+  
   const append = (value) => {
-    let currentNode = first;
     while (currentNode.value) {
       currentNode = currentNode.next;
     }
@@ -36,8 +37,7 @@ function LinkedList(first) {
   };
 
   const size = () => {
-    let size = 0,
-      currentNode = first;
+    let size = 0;
     while (currentNode.value) {
       currentNode = currentNode.next;
       size += 1;
@@ -48,7 +48,6 @@ function LinkedList(first) {
   const head = () => first.value;
 
   const tail = () => {
-    let currentNode = first;
     while (currentNode.next) {
       currentNode = currentNode.next;
     }
@@ -56,8 +55,6 @@ function LinkedList(first) {
   };
 
   const at = (index) => {
-    let currentIndex = 0;
-    let currentNode = first;
     while (currentNode.value) {
       if (currentIndex === index) return currentNode.value;
       currentIndex += 1;
@@ -65,7 +62,49 @@ function LinkedList(first) {
       if (!currentNode) return;
     }
   };
-  return { first, append, prepend, size, head, tail, at };
+  
+  const pop = () => {
+    let length = size(); // 4
+    // while loop find out the penultimate node; Chane the penultimate.next to
+    // null will delete the last node; 
+    // Don't find the last node, change last node to null will not effect the
+    // penultimate.next;
+    while (currentIndex < length - 2) {
+      currentNode = currentNode.next;
+      currentIndex++;
+    }
+    currentNode.next = null;
+  }
+
+  const contains = (value) => {
+    while (currentNode.value) {
+      if (currentNode.value === value) return true;
+      currentNode = currentNode.next;
+      if (!currentNode) return false;
+    }
+  }
+
+  const find = (value) => {
+    while (currentNode.value) {
+      if (currentNode.value === value) return currentIndex;
+      currentIndex += 1;
+      currentNode = currentNode.next;
+      if (!currentNode) return null;
+    }
+  }
+
+  const toString = () => {
+    let str = '';
+    while (currentNode.value) {
+      str += `( ${currentNode.value} ) -> `;
+      currentNode = currentNode.next;
+      if (!currentNode) break;
+    }
+    str += 'null';
+    return str;
+  }
+
+  return { first, append, prepend, size, head, tail, at, pop, contains, find, toString };
 }
 
 const node1 = Node("once");
