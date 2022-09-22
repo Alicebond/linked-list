@@ -124,6 +124,7 @@ function LinkedList(first) {
       currentNode = currentNode.next;
       currentIndex += 1;
     }
+    if (!currentNode) return;
     let temp = currentNode.next;
     currentNode.next = newNode;
     newNode.next = temp;
@@ -132,11 +133,21 @@ function LinkedList(first) {
   const removeAt = (index) => {
     let currentNode = first;
     let currentIndex = 0;
-    while(currentIndex < index - 2) {
-      currentNode = currentNode.next;
-      currentIndex += 1;
+    if (index >= size()) return;
+    if (index === 0) {
+      first = currentNode.next;
+      return;
     }
-    currentNode.next = currentNode.next.next;
+    while(currentNode.value) {
+      if(currentIndex === index - 1) {
+        currentNode.next = currentNode.next.next;
+        return;
+      } else {
+        currentNode = currentNode.next;
+        currentIndex += 1;
+      }
+      if (!currentNode) return;
+    }
   }
 
   return { first, append, prepend, size, head, tail, at, pop, contains, find, toString, insertAt, removeAt };
