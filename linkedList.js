@@ -22,8 +22,6 @@ function Node(value = null) {
 }
 
 function LinkedList(first) {
-  let currentNode = first, currentIndex = 0;
-  
   const append = (value) => {
     let currentNode = first;
     while (currentNode.value) {
