@@ -25,6 +25,7 @@ function LinkedList(first) {
   let currentNode = first, currentIndex = 0;
   
   const append = (value) => {
+    let currentNode = first;
     while (currentNode.value) {
       currentNode = currentNode.next;
     }
@@ -37,6 +38,7 @@ function LinkedList(first) {
   };
 
   const size = () => {
+    let currentNode = first;
     let size = 0;
     while (currentNode.value) {
       currentNode = currentNode.next;
@@ -48,6 +50,7 @@ function LinkedList(first) {
   const head = () => first.value;
 
   const tail = () => {
+    let currentNode = first;
     while (currentNode.next) {
       currentNode = currentNode.next;
     }
@@ -55,6 +58,8 @@ function LinkedList(first) {
   };
 
   const at = (index) => {
+    let currentNode = first;
+    let currentIndex = 0;
     while (currentNode.value) {
       if (currentIndex === index) return currentNode.value;
       currentIndex += 1;
@@ -65,6 +70,8 @@ function LinkedList(first) {
   
   const pop = () => {
     let length = size(); // 4
+    let currentNode = first;
+    let currentIndex = 0;
     // while loop find out the penultimate node; Chane the penultimate.next to
     // null will delete the last node; 
     // Don't find the last node, change last node to null will not effect the
@@ -77,6 +84,7 @@ function LinkedList(first) {
   }
 
   const contains = (value) => {
+    let currentNode = first;
     while (currentNode.value) {
       if (currentNode.value === value) return true;
       currentNode = currentNode.next;
@@ -85,6 +93,7 @@ function LinkedList(first) {
   }
 
   const find = (value) => {
+    let currentNode = first;
     while (currentNode.value) {
       if (currentNode.value === value) return currentIndex;
       currentIndex += 1;
@@ -95,6 +104,7 @@ function LinkedList(first) {
 
   const toString = () => {
     let str = '';
+    let currentNode = first;
     while (currentNode.value) {
       str += `( ${currentNode.value} ) -> `;
       currentNode = currentNode.next;
@@ -104,7 +114,9 @@ function LinkedList(first) {
     return str;
   }
   
-    const insertAt = (value, index) => {
+  const insertAt = (value, index) => {
+    let currentNode = first;
+    let currentIndex = 0;
     if (index === 0) {
       prepend(value);
       return;
@@ -120,6 +132,8 @@ function LinkedList(first) {
   }
 
   const removeAt = (index) => {
+    let currentNode = first;
+    let currentIndex = 0;
     while(currentIndex < index - 2) {
       currentNode = currentNode.next;
       currentIndex += 1;
@@ -128,7 +142,6 @@ function LinkedList(first) {
   }
 
   return { first, append, prepend, size, head, tail, at, pop, contains, find, toString, insertAt, removeAt };
-
 }
 
 const node1 = Node("once");
